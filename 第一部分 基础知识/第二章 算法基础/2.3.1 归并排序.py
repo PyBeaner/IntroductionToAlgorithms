@@ -6,6 +6,37 @@ __author__ = 'PyBeaner'
 MAX = 10 ** 10
 
 
+def merge_without_sentinel(llist, rlist):
+    len_l = len(llist)
+    if len_l == 0:
+        return rlist
+    len_r = len(rlist)
+    if len_r == 0:
+        return llist
+    length = len_l + len_r
+
+    i = j = 0
+    ret = []
+    for k in range(length):
+        # the left one ends
+        if i == len_l:
+            ret += rlist[j:]
+            break
+        # the right one ends
+        if j == len_r:
+            ret += llist[i:]
+            break
+        l_val = llist[i]
+        r_val = rlist[j]
+        if l_val < r_val:
+            ret.append(l_val)
+            i += 1
+        else:
+            ret.append(r_val)
+            j += 1
+    return ret
+
+
 def merge(llist, rlist):
     len_l = len(llist)
     if len_l == 0:
@@ -46,7 +77,8 @@ def merge_sort(alist):
     llist = merge_sort(llist)
     rlist = merge_sort(rlist)
 
-    return merge(llist, rlist)
+    # return merge(llist, rlist)
+    return merge_without_sentinel(llist, rlist)
 
 
 if __name__ == '__main__':
