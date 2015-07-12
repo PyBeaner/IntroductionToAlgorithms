@@ -1,16 +1,21 @@
+# coding=utf-8
 __author__ = 'PyBeaner'
 
 
-# sentinel card£¨ÉÚ±øÅÆ£©
+# sentinel cardï¼ˆå“¨å…µç‰Œï¼‰
 MAX = 10 ** 10
 
 
 def merge(llist, rlist):
     len_l = len(llist)
+    if len_l == 0:
+        return rlist
     len_r = len(rlist)
+    if len_r == 0:
+        return llist
     length = len_l + len_r
 
-    # ±ÜÃâÃ¿´ÎÅĞ¶ÏÊÇ·ñÄ³¸öÁĞ±í½áÊøÁË
+    # é¿å…æ¯æ¬¡åˆ¤æ–­æ˜¯å¦æŸä¸ªåˆ—è¡¨ç»“æŸäº†
     llist.append(MAX)
     rlist.append(MAX)
 
@@ -30,8 +35,11 @@ def merge(llist, rlist):
 
 def merge_sort(alist):
     length = len(alist)
-    if length == 1:
+    if length <= 1:
         return alist
+    if length == 2:
+        return alist if alist[0] < alist[1] else [alist[1], alist[0]]
+
     half = length // 2
     llist = alist[:half]
     rlist = alist[half:]
@@ -44,7 +52,7 @@ def merge_sort(alist):
 if __name__ == '__main__':
     from random import sample
 
-    alist = sample(range(100), 20)
+    alist = sample(range(100), 30)
     print("Before:")
     print(alist)
     print("After:")
