@@ -15,12 +15,13 @@ def insertion_sort(alist):
 
 
 # 利用二分查找的插入排序
+# nlg(n)
 def insertion_sort_using_bisection(alist):
     for i in range(1, len(alist)):
         value = alist[i]
+        # lg(n/2)
         pos = bisection_search_position(alist[:i], value)
-        for j in range(i, pos - 1, -1):
-            alist[j] = alist[j - 1]
+        alist[pos+1:i+1] = alist[pos:i]
         alist[pos] = value
 
 
