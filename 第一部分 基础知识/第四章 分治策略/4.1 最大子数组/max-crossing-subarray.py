@@ -29,7 +29,7 @@ def find_max_subarray(alist, low, high):
 
     mid = (high + low) // 2
     left_low, left_high, left_sum = find_max_subarray(alist, low, mid)
-    right_low, right_high, right_sum = find_max_subarray(alist, mid, high)
+    right_low, right_high, right_sum = find_max_subarray(alist, mid+1, high)
     cross_low, cross_high, cross_sum = find_max_crossing_subarray(alist, low, mid, high)
     if left_sum >= right_sum and left_sum >= cross_sum:
         return left_low, left_high, left_sum
@@ -37,3 +37,13 @@ def find_max_subarray(alist, low, high):
         return right_low, right_high, right_sum
     else:
         return cross_low, cross_high, cross_sum
+
+
+if __name__ == '__main__':
+    from random import sample
+
+    alist = sample(range(-10, 10), 10)
+    alist = [9, 8, -4, -1, -9, 6, -3, -2, 5, 0]
+    # print(alist)
+    low, high, sum = find_max_subarray(alist, 0, 9)
+    print(low, high, sum)
