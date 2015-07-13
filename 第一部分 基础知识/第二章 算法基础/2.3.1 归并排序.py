@@ -81,6 +81,30 @@ def merge_sort(alist):
     return merge_without_sentinel(llist, rlist)
 
 
+def insertion_sort(alist):
+    for i in range(1, len(alist)):
+        value = alist[i]
+        while value < alist[i - 1] and i > 0:
+            alist[i] = alist[i - 1]
+            i -= 1
+        alist[i] = value
+    return alist
+
+# 当归并排序的子序列较小时，使用插入排序可能能获得更好的效率
+def merge_sort_along_with_insertion_sort(alist, threshold_to_use_insertion):
+    length = len(alist)
+    if length <= threshold_to_use_insertion:
+        return insertion_sort(alist)
+
+    half = length // 2
+    llist = alist[:half]
+    rlist = alist[half:]
+    llist = merge_sort(llist)
+    rlist = merge_sort(rlist)
+
+    return merge(llist, rlist)
+
+
 if __name__ == '__main__':
     from random import sample
 
@@ -88,5 +112,6 @@ if __name__ == '__main__':
     print("Before:")
     print(alist)
     print("After:")
-    alist = merge_sort(alist)
+    # alist = merge_sort(alist)
+    alist = merge_sort_along_with_insertion_sort(alist,5)
     print(alist)
