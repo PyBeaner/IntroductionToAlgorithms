@@ -1,6 +1,8 @@
 __author__ = 'PyBeaner'
 
 
+# n+(n-1)+(n-2)...
+# O(n^2)
 def recursive_insertion_sort(alist):
     length = len(alist)
     if length <= 1:
