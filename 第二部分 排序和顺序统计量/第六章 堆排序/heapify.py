@@ -4,21 +4,22 @@ __author__ = 'PyBeaner'
 
 # O(lg(n))
 # height = lg(i)
-def heapify(alist, i=0):
+def heapify(alist, i=0, heap_size=None):
     # 使某个结点堆化，(前提：假设该结点的子节点都已堆化）
-    length = len(alist)
+    if heap_size is None:
+        heap_size = len(alist)
     l = 2 * i
     r = 2 * i + 1
     smallest = i
-    if l < length and alist[l] < alist[i]:
+    if l < heap_size and alist[l] < alist[i]:
         smallest = l
 
-    if r < length and alist[r] < alist[smallest]:
+    if r < heap_size and alist[r] < alist[smallest]:
         smallest = r
 
     if smallest != i:
         alist[i], alist[smallest] = alist[smallest], alist[i]
-        heapify(alist, smallest)
+        heapify(alist, smallest, heap_size)
 
 
 # O(nlg(n))
@@ -31,11 +32,13 @@ def build_heap(alist):
 
 
 def heap_sort(alist):
-    sorted_list = []
-    while alist:
-        build_heap(alist)
-        sorted_list.append(alist.pop(0))
-    return sorted_list
+    build_heap(alist)
+    heap_size = len(alist)
+    for i in range(heap_size - 1, 0, -1):
+        alist[i], alist[0] = alist[0], alist[i]
+        heapify(alist, 0, i)
+    alist.reverse()
+
 
 if __name__ == '__main__':
     from random import sample
@@ -46,10 +49,5 @@ if __name__ == '__main__':
     build_heap(alist)
     print(alist)
 
-    import heapq
-
-    heapq.heapify(alist)
+    heap_sort(alist)
     print(alist)
-
-    sort = heap_sort(alist)
-    print(sort)
