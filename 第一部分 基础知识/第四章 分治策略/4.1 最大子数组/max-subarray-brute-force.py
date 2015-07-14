@@ -1,6 +1,8 @@
 __author__ = 'PyBeaner'
 
 threshold = -10**10
+
+# O(n^2)
 def find_max_subarray(alist):
     length = len(alist)
     max_sum = threshold

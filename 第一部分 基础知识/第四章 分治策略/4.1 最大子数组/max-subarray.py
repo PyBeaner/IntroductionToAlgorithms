@@ -3,7 +3,7 @@ __author__ = 'PyBeaner'
 
 threshold = -10 ** 10
 
-
+# O( lg(n) )
 def find_max_crossing_subarray(alist, low, mid, high):
     left_sum = threshold
     sum = 0
