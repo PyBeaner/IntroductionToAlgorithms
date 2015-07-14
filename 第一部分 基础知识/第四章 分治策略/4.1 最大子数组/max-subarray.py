@@ -54,4 +54,5 @@ if __name__ == '__main__':
     alist = sample(range(-20, -1), 10)
     print(alist)
     low, high, sum = find_max_subarray(alist, 0, 9)
+    # 列表中最大的元素
     print(low, high, sum)
