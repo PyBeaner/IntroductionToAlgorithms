@@ -5,7 +5,7 @@ def find_max_crossing_subarray(alist, low, mid, high):
     left_sum = 0
     sum = 0
     max_left = mid
-    for i in range(mid - 1, low-1, -1):
+    for i in range(mid - 1, low - 1, -1):
         sum += alist[i]
         if sum > left_sum:
             left_sum = sum
@@ -14,7 +14,7 @@ def find_max_crossing_subarray(alist, low, mid, high):
     right_sum = 0
     sum = 0
     max_right = mid
-    for i in range(mid, high+1):
+    for i in range(mid, high + 1):
         sum += alist[i]
         if sum > right_sum:
             right_sum = sum
@@ -24,12 +24,10 @@ def find_max_crossing_subarray(alist, low, mid, high):
 
 
 def find_max_subarray(alist, low, high):
-    if high == low:
+    if 1 >= high - low >= 0:
         return low, high, alist[low]
 
     mid = (high + low) // 2
-    if mid == low:
-        return low, high, alist[low]
     left_low, left_high, left_sum = find_max_subarray(alist, low, mid - 1)
     right_low, right_high, right_sum = find_max_subarray(alist, mid + 1, high)
     cross_low, cross_high, cross_sum = find_max_crossing_subarray(alist, low, mid, high)
@@ -45,7 +43,6 @@ if __name__ == '__main__':
     from random import sample
 
     alist = sample(range(-10, 10), 10)
-    # alist = [9, 8, -4, -1, -9, 6, -3, -2, 5, 0]
     print(alist)
     low, high, sum = find_max_subarray(alist, 0, 9)
     print(low, high, sum)
