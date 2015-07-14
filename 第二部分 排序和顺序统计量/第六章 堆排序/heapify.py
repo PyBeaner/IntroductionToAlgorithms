@@ -30,13 +30,16 @@ def build_heap(alist):
     for i in range(length // 2, -1, -1):
         heapify(alist, i)
 
-
+# O(nlg(n))
 def heap_sort(alist):
     build_heap(alist)
     heap_size = len(alist)
     for i in range(heap_size - 1, 0, -1):
+        # 得到有效heap中最值
         alist[i], alist[0] = alist[0], alist[i]
+        # 通过限制heap的大小，使得heapify的时候可以不影响已经得到的排好序的部分
         heapify(alist, 0, i)
+    # 应该构建最大堆，可以避免此处的reverse
     alist.reverse()
 
 
