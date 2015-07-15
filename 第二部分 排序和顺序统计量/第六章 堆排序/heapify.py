@@ -73,8 +73,9 @@ def heap_extract_max(maxheap, heap_size=None):
         raise Exception("heap underflow")
     max = maxheap[0]
     maxheap[0] = maxheap[heap_size - 1]
-    heap_size -= 1
-    heapify_max(maxheap, 0, heap_size)
+    # heap_size -= 1
+    maxheap.pop()
+    heapify_max(maxheap, 0)
     return max
 
 
@@ -84,8 +85,9 @@ def heap_extract_min(minheap, heap_size=None):
         heap_size = len(minheap)
     min = minheap[0]
     minheap[0] = minheap[heap_size - 1]
-    heap_size -= 1
-    heapify(alist, 0, heap_size)
+    # heap_size -= 1
+    minheap.pop()
+    heapify(alist, 0)
     return min
 
 
@@ -126,8 +128,9 @@ if __name__ == '__main__':
     build_heap(alist, maxheap=True)
     print(alist)
     for i in range(len(alist)):
-        print(heap_extract_max(alist, len(alist) - i), end=",")
+        print(heap_extract_max(alist), end=",")
     print()
+    print(alist)
 
     alist = sample(range(100), 10)
     build_heap(alist, maxheap=True)
@@ -140,5 +143,6 @@ if __name__ == '__main__':
     build_heap(alist)
     print(alist)
     for i in range(len(alist)):
-        print(heap_extract_min(alist, len(alist) - i), end=",")
+        print(heap_extract_min(alist), end=",")
     print()
+    print(alist)
