@@ -89,6 +89,17 @@ def maxheap_increase_node(alist, i, value):
         i = parent
 
 
+def maxheap_insert(alist, value):
+    min_value = min(alist)
+    # 插入的值比最小值还小，直接放到尾部
+    if value <= min_value:
+        alist.append(value)
+        return
+    alist.append(min_value)
+    # 否则尾部插入最小值，并调用increase函数，增加尾部的值
+    maxheap_increase_node(alist, len(alist)-1, value - min_value)
+
+
 if __name__ == '__main__':
     from random import sample
 
@@ -108,7 +119,9 @@ if __name__ == '__main__':
     print()
 
     alist = sample(range(100), 10)
-    build_heap(alist,maxheap=True)
+    build_heap(alist, maxheap=True)
     print(alist)
-    maxheap_increase_node(alist,5,50)
+    maxheap_increase_node(alist, 5, 50)
+    print(alist)
+    maxheap_insert(alist,50)
     print(alist)
