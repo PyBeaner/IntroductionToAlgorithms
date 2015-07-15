@@ -123,6 +123,15 @@ def maxheap_insert(alist, value):
     maxheap_increase_node(alist, len(alist) - 1, value - min_value)
 
 
+def minheap_insert(alist, value):
+    max_value = max(alist)
+    if value >= max_value:
+        alist.append(value)
+        return
+    alist.append(max_value)
+    minheap_decrease_node(alist, len(alist) - 1, max_value - value)
+
+
 if __name__ == '__main__':
     from random import sample
 
@@ -157,9 +166,10 @@ if __name__ == '__main__':
     print()
     print(alist)
 
-
     alist = sample(range(100), 10)
     build_heap(alist)
     print(alist)
     minheap_decrease_node(alist, 5, 50)
+    print(alist)
+    minheap_insert(alist,30)
     print(alist)
