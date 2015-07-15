@@ -92,11 +92,21 @@ def heap_extract_min(minheap, heap_size=None):
 
 
 def maxheap_increase_node(alist, i, value):
-    if value <= 0:
-        raise Exception("increasing value cannot be less than 1")
+    if value < 0:
+        raise Exception("increasing value cannot be less than zero")
     alist[i] += value
     # 重新排序（此处不应该使用heapify，而是和parent对比）
     while i > 0 and alist[i] > alist[i // 2]:
+        parent = i // 2
+        alist[i], alist[parent] = alist[parent], alist[i]
+        i = parent
+
+
+def minheap_decrease_node(alist, i, value):
+    if value < 0:
+        raise Exception("decreasing value cannot be less than zero")
+    alist[i] -= value
+    while i > 0 and alist[i] < alist[i // 2]:
         parent = i // 2
         alist[i], alist[parent] = alist[parent], alist[i]
         i = parent
@@ -145,4 +155,11 @@ if __name__ == '__main__':
     for i in range(len(alist)):
         print(heap_extract_min(alist), end=",")
     print()
+    print(alist)
+
+
+    alist = sample(range(100), 10)
+    build_heap(alist)
+    print(alist)
+    minheap_decrease_node(alist, 5, 50)
     print(alist)
