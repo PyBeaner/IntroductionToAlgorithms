@@ -78,6 +78,17 @@ def heap_extract_max(maxheap, heap_size=None):
     return max
 
 
+def heap_extract_min(minheap, heap_size=None):
+    # 从最小堆中提取最小值
+    if heap_size is None:
+        heap_size = len(minheap)
+    min = minheap[0]
+    minheap[0] = minheap[heap_size - 1]
+    heap_size -= 1
+    heapify(alist, 0, heap_size)
+    return min
+
+
 def maxheap_increase_node(alist, i, value):
     if value <= 0:
         raise Exception("increasing value cannot be less than 1")
@@ -97,7 +108,7 @@ def maxheap_insert(alist, value):
         return
     alist.append(min_value)
     # 否则尾部插入最小值，并调用increase函数，增加尾部的值
-    maxheap_increase_node(alist, len(alist)-1, value - min_value)
+    maxheap_increase_node(alist, len(alist) - 1, value - min_value)
 
 
 if __name__ == '__main__':
@@ -123,5 +134,11 @@ if __name__ == '__main__':
     print(alist)
     maxheap_increase_node(alist, 5, 50)
     print(alist)
-    maxheap_insert(alist,50)
+    maxheap_insert(alist, 50)
     print(alist)
+
+    build_heap(alist)
+    print(alist)
+    for i in range(len(alist)):
+        print(heap_extract_min(alist, len(alist) - i), end=",")
+    print()
