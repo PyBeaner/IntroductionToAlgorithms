@@ -66,6 +66,7 @@ def heap_sort(alist):
 
 
 def heap_extract_max(maxheap, heap_size=None):
+    # 从最大堆中提取最大值
     if heap_size is None:
         heap_size = len(maxheap)
     if heap_size == 0:
@@ -75,6 +76,17 @@ def heap_extract_max(maxheap, heap_size=None):
     heap_size -= 1
     heapify_max(maxheap, 0, heap_size)
     return max
+
+
+def maxheap_increase_node(alist, i, value):
+    if value <= 0:
+        raise Exception("increasing value cannot be less than 1")
+    alist[i] += value
+    # 重新排序（此处不应该使用heapify，而是和parent对比）
+    while i > 0 and alist[i] > alist[i // 2]:
+        parent = i // 2
+        alist[i], alist[parent] = alist[parent], alist[i]
+        i = parent
 
 
 if __name__ == '__main__':
@@ -93,3 +105,10 @@ if __name__ == '__main__':
     print(alist)
     for i in range(len(alist)):
         print(heap_extract_max(alist, len(alist) - i), end=",")
+    print()
+
+    alist = sample(range(100), 10)
+    build_heap(alist,maxheap=True)
+    print(alist)
+    maxheap_increase_node(alist,5,50)
+    print(alist)
