@@ -41,10 +41,28 @@ def quick_sort(alist, l=None, r=None):
     quick_sort(alist, q + 1, r)
 
 
+# 尾递归
+def tail_recursive_quicksort(alist, l=None, r=None):
+    if l is None:
+        l = 0
+    if r is None:
+        r = len(alist) - 1
+    if l >= r:
+        return
+    while l < r:
+        q = randomized_partition(alist, l, r)
+        tail_recursive_quicksort(alist, l, q - 1)
+        l = q + 1
+
+
 if __name__ == '__main__':
     from random import sample
 
     alist = sample(range(10), 10)
     print(alist)
-    quick_sort(alist)
+
+    # quick_sort(alist)
+    # print(alist)
+
+    tail_recursive_quicksort(alist)
     print(alist)
