@@ -10,7 +10,7 @@ def partition(alist, l, r):
         if alist[i] < x:
             ret += 1
             alist[i], alist[ret] = alist[ret], alist[i]
-    # 所有元素相等,折中返回，提高效率
+    # 所有元素相等,折中(保持平衡)，提高效率
     if alist[l] == alist[r]:
         ret = (l + r) // 2
     else:
