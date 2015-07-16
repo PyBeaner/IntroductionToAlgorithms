@@ -19,6 +19,14 @@ def partition(alist, l, r):
     return ret
 
 
+def randomized_partition(alist, l, r):
+    import random
+
+    i = random.randint(l, r)
+    alist[i], alist[l] = alist[l], alist[i]
+    return partition(alist, l, r)
+
+
 #  T(n) = 2 * T(n/2) + n
 def quick_sort(alist, l=None, r=None):
     if l is None:
@@ -27,8 +35,8 @@ def quick_sort(alist, l=None, r=None):
         r = len(alist) - 1
     if l >= r:
         return
-    q = partition(alist, l, r)
-
+    # q = partition(alist, l, r)
+    q = randomized_partition(alist, l, r)
     quick_sort(alist, l, q - 1)
     quick_sort(alist, q + 1, r)
 
