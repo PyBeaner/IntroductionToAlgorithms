@@ -1,6 +1,7 @@
 __author__ = 'PyBeaner'
 
 
+# O(n)
 def partition(alist, l, r):
     x = alist[l]
     ret = l
@@ -8,10 +9,15 @@ def partition(alist, l, r):
         if alist[i] < x:
             ret += 1
             alist[i], alist[ret] = alist[ret], alist[i]
-    alist[l], alist[ret] = alist[ret], alist[l]
+    # 所有元素都大于等于X,如果直接返回X所在位置(l)，导致死循环
+    if l == ret:
+        ret = (l + r) // 2
+    else:
+        alist[l], alist[ret] = alist[ret], alist[l]
     return ret
 
 
+#  T(n) = 2 * T(n/2) + n
 def quick_sort(alist, l=None, r=None):
     if l is None:
         l = 0
