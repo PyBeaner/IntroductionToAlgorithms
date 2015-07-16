@@ -1,3 +1,4 @@
+# coding=utf-8
 __author__ = 'PyBeaner'
 
 
@@ -9,11 +10,12 @@ def partition(alist, l, r):
         if alist[i] < x:
             ret += 1
             alist[i], alist[ret] = alist[ret], alist[i]
-    # ËùÓÐÔªËØ¶¼´óÓÚµÈÓÚX,Èç¹ûÖ±½Ó·µ»ØXËùÔÚÎ»ÖÃ(l)£¬µ¼ÖÂËÀÑ­»·
-    if l == ret:
+    # æ‰€æœ‰å…ƒç´ ç›¸ç­‰,æŠ˜ä¸­è¿”å›žï¼Œæé«˜æ•ˆçŽ‡
+    if alist[l] == alist[r]:
         ret = (l + r) // 2
     else:
         alist[l], alist[ret] = alist[ret], alist[l]
+
     return ret
 
 
