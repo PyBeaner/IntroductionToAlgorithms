@@ -17,6 +17,9 @@ class Queue:
     def isFull(self):
         return self._length == self._storage_len
 
+    def __len__(self):
+        return self._length
+
     def enqueue(self, x):
         if self.isFull():
             raise Exception("Queue is full")
@@ -37,8 +40,6 @@ class Queue:
             self.head = 0
         else:
             self.head += 1
-        if self.head == self.tail:
-            self.head = self.tail = 0
         self._length -= 1
         return x
 
@@ -50,7 +51,7 @@ class Queue:
         else:
             l = self.q[self.head:self._storage_len] + self.q[:self.tail]
 
-        print(l)
+        print("Queue", l)
 
 
 if __name__ == '__main__':
