@@ -7,9 +7,11 @@ class Stack:
         self.q1 = Queue(length)
         self.q2 = Queue(length)
 
+    # O(1)
     def push(self, x):
         self.q1.enqueue(x)
 
+    # O£¨n£©
     def pop(self):
         if self.q1.isEmpty():
             raise Exception("Empty Stack")
@@ -19,6 +21,7 @@ class Stack:
         self.q1, self.q2 = self.q2, self.q1
         return v
 
+    # O(1)
     def isEmpty(self):
         return self.q1.isEmpty()
 
