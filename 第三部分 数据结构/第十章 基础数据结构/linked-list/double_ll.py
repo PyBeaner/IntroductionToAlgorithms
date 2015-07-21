@@ -45,6 +45,17 @@ class DoubleLinkedList:
         self._length = length
         return tail
 
+    def delete(self, node):
+        # not the head
+        if node.prev is not None:
+            node.prev.next = node.next
+        # the head
+        else:
+            self.head = node.next
+
+        if node.next is not None:
+            node.next.prev = node.prev
+
     def append(self, node):
         node.next = None
         node.prev = self.tail
@@ -106,4 +117,7 @@ if __name__ == '__main__':
     dll.insert(Node(-2), 5)
     dll.insert(Node(-1), 0)
     dll.insert(Node(-3), 3)
+    dll.display()
+
+    dll.delete(head)
     dll.display()
