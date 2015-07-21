@@ -46,6 +46,10 @@ class DoubleLinkedList:
         return tail
 
     def delete(self, node):
+        if not isinstance(node,Node):
+            node = self.search(node)
+            if not node:
+                raise ValueError("cannot delete a non-existing node")
         # not the head
         if node.prev is not None:
             node.prev.next = node.next
