@@ -51,17 +51,17 @@ class DoubleLinkedList:
         self.tail.next = node
 
     def insert(self, node, pos=None):
-        pos = pos if pos is not None else self.length
+        pos = pos if pos is not None else 0
         assert isinstance(node, Node)
         assert isinstance(pos, int) and pos >= 0
-        if pos >= self.length:
-            self.append(node)
-        elif pos == 0:
+        if pos == 0:
             node.next = self.head
             node.prev = None
             self.head.prev = node
 
             self.head = node
+        elif pos >= self.length:
+            self.append(node)
         else:
             node_after = self.head
             for i in range(pos):
@@ -103,7 +103,7 @@ if __name__ == '__main__':
 
     dll.display()
 
-    dll.insert(Node(-2))
+    dll.insert(Node(-2), 5)
     dll.insert(Node(-1), 0)
     dll.insert(Node(-3), 3)
     dll.display()
