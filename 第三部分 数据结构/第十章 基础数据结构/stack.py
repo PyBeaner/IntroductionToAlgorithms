@@ -17,7 +17,7 @@ class Stack:
 
     def pop(self):
         if self.isEmpty():
-            raise Exception("underflow")
+            raise Exception("Empty Stack")
         self.len -= 1
         return self.arr.pop()
 
