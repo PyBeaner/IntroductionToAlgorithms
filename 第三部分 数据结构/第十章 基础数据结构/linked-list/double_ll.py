@@ -26,11 +26,8 @@ class DoubleLinkedList:
 
     @property
     def length(self):
+        self._getTail()
         return self._length
-
-    @length.setter
-    def length(self, value):
-        self._length = value
 
     def __len__(self):
         return self.length
@@ -54,7 +51,28 @@ class DoubleLinkedList:
         self.tail.next = node
 
     def insert(self, node, pos=None):
-        pass
+        pos = pos if pos is not None else self.length
+        assert isinstance(node, Node)
+        assert isinstance(pos, int) and pos >= 0
+        if pos >= self.length:
+            self.append(node)
+        elif pos == 0:
+            node.next = self.head
+            node.prev = None
+            self.head.prev = node
+
+            self.head = node
+        else:
+            node_after = self.head
+            for i in range(pos):
+                node_after = node_after.next
+            node_before = node_after.prev
+
+            node_before.next = node
+            node_after.prev = node
+
+            node.prev = node_before
+            node.next = node_after
 
     def search(self, value):
         x = self.head
@@ -62,11 +80,30 @@ class DoubleLinkedList:
             x = x.next
         return x
 
+    def display(self):
+        print("Displaying Double Linked List:")
+        node = self.head
+        while True:
+            if node:
+                print(node)
+                node = node.next
+            else:
+                break
+        print("List End\n")
+
 
 if __name__ == '__main__':
     head = Node(0)
     dll = DoubleLinkedList(head=head)
-    for i in range(10):
+    for i in range(1, 5):
         dll.append(Node(i))
 
-    print(dll.search(9))
+    # print(dll.search(4))
+    # print(len(dll))
+
+    dll.display()
+
+    dll.insert(Node(-2))
+    dll.insert(Node(-1), 0)
+    dll.insert(Node(-3), 3)
+    dll.display()
