@@ -14,10 +14,6 @@ class SingleLinkedList:
     def __init__(self, head=None):
         assert isinstance(head, Node) or head is None
         self.head = head
-        if head is None:
-            self._length = 0
-        else:
-            self._length = 1
 
     @property
     def tail(self):
@@ -54,7 +50,6 @@ class SingleLinkedList:
         if next_node:
             node.value = next_node.value
             node.next = next_node.next
-            del next_node
             return
         # it is the tail, so we need to get the previous one
         else:
@@ -134,21 +129,13 @@ class SingleLinkedList:
 if __name__ == '__main__':
     head = Node(0)
     dll = SingleLinkedList(head=head)
-    for i in range(1, 3):
+    for i in range(1, 5):
         dll.append(Node(i))
 
     dll.display()
 
-    dll.insert(Node(-2), 5)
-    dll.insert(Node(-1), 0)
-    dll.insert(Node(-3), 3)
-    dll.display()
+    print("Reversing...")
+    dll.reverse()
 
-    dll.delete(head)
-    dll.delete(-2)
-    dll.delete(-3)
-    dll.delete(-1)
-    dll.delete(1)
-    dll.delete(2)
     dll.display()
     # dll.delete(1) # not found
