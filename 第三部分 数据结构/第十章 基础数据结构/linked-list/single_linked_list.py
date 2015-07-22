@@ -43,24 +43,32 @@ class SingleLinkedList:
         return self.head is None
 
     def delete(self, node):
-        if isinstance(node, Node):
-            value = node.value
-        else:
-            value = node
+        if not isinstance(node, Node):
+            node = self.search(node)
+            if not node:
+                raise Exception("cannot delete %s: not found" % node)
 
-        if self.isEmpty():
-            raise Exception("cannot delete %s: not found" % value)
-        if self.head.value == value:
-            self.head = self.head.next
+        next_node = node.next
+        # replace this node with the next-node
+        # assuming it is not the tail
+        if next_node:
+            node.value = next_node.value
+            node.next = next_node.next
+            del next_node
+            return
+        else:
+            prev_node = self.getPrevious(node)
+            prev_node.next = node.next
+
+    def getPrevious(self, node):
+        if node is self.head:
             return
 
         prev_node = self.head
-        while prev_node and prev_node.next and prev_node.next.value != value:
+        while prev_node and prev_node.next is not node:
             prev_node = prev_node.next
-        if prev_node and prev_node.next and prev_node.next.value == value:
-            prev_node.next = prev_node.next.next
-        else:
-            raise Exception("cannot delete %s: not found" % value)
+        if prev_node and prev_node.next is node:
+            return prev_node
 
     def append(self, node):
         node.next = None
@@ -125,6 +133,8 @@ if __name__ == '__main__':
     dll.insert(Node(-3), 3)
     dll.display()
 
-    dll.delete(1)
+    dll.delete(head)
+    dll.delete(-2)
+    dll.delete(-3)
     dll.display()
     # dll.delete(1) # not found
