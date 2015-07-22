@@ -10,7 +10,7 @@ class Node:
         return "Node({})<at {}>".format(self.value, id(self))
 
 
-class SingleLinkedList:
+class SinglyLinkedList:
     def __init__(self, head=None):
         assert isinstance(head, Node) or head is None
         self.head = head
@@ -133,7 +133,7 @@ class SingleLinkedList:
 
 if __name__ == '__main__':
     head = Node(0)
-    dll = SingleLinkedList(head=head)
+    dll = SinglyLinkedList(head=head)
     for i in range(1, 5):
         dll.append(Node(i))
 
