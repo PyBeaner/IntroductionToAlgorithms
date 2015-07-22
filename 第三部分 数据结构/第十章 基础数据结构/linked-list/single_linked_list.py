@@ -107,13 +107,8 @@ class SingleLinkedList:
 
     def display(self):
         print("Displaying Double Linked List:")
-        node = self.head
-        while True:
-            if node:
-                print(node)
-                node = node.next
-            else:
-                break
+        for node in self:
+            print(node)
         print("List End\n")
 
     def _getLength(self):
@@ -126,6 +121,15 @@ class SingleLinkedList:
 
     def reverse(self):
         pass
+
+    def __iter__(self):
+        if self.isEmpty():
+            raise StopIteration()
+        node = self.head
+        while node:
+            yield node
+            node = node.next
+
 
 if __name__ == '__main__':
     head = Node(0)
