@@ -73,18 +73,18 @@ class SingleLinkedList:
         pos = pos if pos is not None else 0
         assert isinstance(node, Node)
         assert isinstance(pos, int) and pos >= 0
-        if pos >= self.length:
+        if pos == 0:
+            node.next = self.head
+            self.head = node
+        elif pos >= self.length:
             self.append(node)
-        elif pos > 0:
+        else:
             node_before = self.head
             for i in range(pos - 1):
                 node_before = node_before.next
             node_after = node_before.next
             node_before.next = node
             node.next = node_after
-        else:
-            node.next = self.head
-            self.head = node
 
     def search(self, value):
         x = self.head
