@@ -115,7 +115,12 @@ class SingleLinkedList:
         return length
 
     def reverse(self):
-        pass
+        length = self.length
+        for i in range(length - 1):
+            import copy
+            node = copy.copy(self.head)
+            self.head = self.head.next
+            self.insert(node, length - i - 1)
 
     def __iter__(self):
         if self.isEmpty():
@@ -138,4 +143,3 @@ if __name__ == '__main__':
     dll.reverse()
 
     dll.display()
-    # dll.delete(1) # not found
