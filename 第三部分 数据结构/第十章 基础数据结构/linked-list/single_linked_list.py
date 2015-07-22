@@ -56,9 +56,14 @@ class SingleLinkedList:
             node.next = next_node.next
             del next_node
             return
+        # it is the tail, so we need to get the previous one
         else:
             prev_node = self.getPrevious(node)
-            prev_node.next = node.next
+            if prev_node:
+                prev_node.next = node.next
+            # it is the head at the same time
+            else:
+                self.head = None
 
     def getPrevious(self, node):
         if node is self.head:
@@ -119,11 +124,13 @@ class SingleLinkedList:
             node = node.next
         return length
 
+    def reverse(self):
+        pass
 
 if __name__ == '__main__':
     head = Node(0)
     dll = SingleLinkedList(head=head)
-    for i in range(1, 5):
+    for i in range(1, 3):
         dll.append(Node(i))
 
     dll.display()
@@ -136,5 +143,8 @@ if __name__ == '__main__':
     dll.delete(head)
     dll.delete(-2)
     dll.delete(-3)
+    dll.delete(-1)
+    dll.delete(1)
+    dll.delete(2)
     dll.display()
     # dll.delete(1) # not found
