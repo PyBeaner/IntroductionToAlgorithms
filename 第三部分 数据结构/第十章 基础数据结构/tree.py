@@ -29,6 +29,18 @@ class Tree:
                     yield from Tree(right_sibling)
                     right_sibling = right_sibling.right_sibling
 
+    def iterate_without_recursive(self):
+        s = []
+        if self.root:
+            s.append(self.root)
+        while s:
+            node = s.pop()
+            print(node)
+            left = node.left_child
+            while left:
+                s.append(left)
+                left = left.right_sibling
+
 
 def build_tree(root, width, height):
     if height <= 0:
@@ -54,6 +66,10 @@ def build_tree(root, width, height):
 
 if __name__ == '__main__':
     root = Node("root")
-    t = build_tree(root, 2, 2)
+    t = build_tree(root, 3, 2)
     for node in t:
         print(node)
+
+    print("End...")
+
+    t.iterate_without_recursive()
