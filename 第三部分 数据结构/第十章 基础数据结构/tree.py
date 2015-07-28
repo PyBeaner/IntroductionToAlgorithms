@@ -29,21 +29,6 @@ class Tree:
                     yield from Tree(right_sibling)
                     right_sibling = right_sibling.right_sibling
 
-    def display(self):
-        if not self.root:
-            print("Tree End")
-            return
-        if not self.root.root:
-            print(self.root)
-        node = self.root.left_child
-        while node:
-            print(node, end=",")
-            node = node.right_sibling
-        print()
-        left = self.root.left_child
-        child_tree = Tree(left)
-        child_tree.display()
-
 
 def build_tree(root, width, height):
     if height <= 0:
@@ -69,7 +54,6 @@ def build_tree(root, width, height):
 
 if __name__ == '__main__':
     root = Node("root")
-    t = build_tree(root, 3, 3)
-    # for node in t:
-    #     print(node)
-    t.display()
+    t = build_tree(root, 2, 2)
+    for node in t:
+        print(node)
